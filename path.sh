@@ -36,7 +36,7 @@ if [ "$ANSWER" = "yes" ]; then
 
 string1=$(echo $oldpwd | sed 's_/_\\/_g')
 string2=$(echo $newpwd | sed 's_/_\\/_g')
-find . -type f -print0 | xargs -0 -P 20 sed -i "s/$string1/$string2/g"
+find . -type f -exec sed -i "s/$string1/$string2/g" {} \;
 wp search-replace "$oldpwd" "$newpwd" --all-tables --allow-root
 echo -e "Search and replace completed! $em3 " 
 exit
